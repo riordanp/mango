@@ -9,13 +9,11 @@ jobs:
       - run:
           name: Setup Rust
           command: |
-            rustup component add rustfmt
             rustup component add rust-src
       - run:
           name: Setup Solana Toolchain
           command: |
             sh -c "$(curl -sSfL https://release.solana.com/v1.6.4/install)"
-            cargo install spl-token-cli
             cd program
       - run:
           name: Run Unit Tests
