@@ -16,10 +16,8 @@ jobs:
             sh -c "$(curl -sSfL https://release.solana.com/v1.6.4/install)"
             cd program
       - run:
-          name: Run Unit Tests
+          name: Run Tests
           command: |
+            cd program
             cargo test
-      - run:
-          name: Run Integration Tests
-          command: |
             cargo test-bpf
