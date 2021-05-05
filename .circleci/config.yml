@@ -1,0 +1,28 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/rust:1.53.0
+    steps:
+      - checkout
+      - run:
+          name: Setup Rust
+          command: |
+            rustup component add rustfmt
+            rustup component add rust-src
+      - run:
+          name: Setup Solana Toolchain
+          command: |
+            sh -c "$(curl -sSfL https://release.solana.com/v1.6.4/install)"
+            sudo apt-get install -y libssl-dev libudev-dev
+            cargo install spl-token-cli
+            cd program
+      - run:
+          name: Run Unit Tests
+          command: |
+            cargo test
+      - run:
+          name: Run Integration Tests
+          command: |
+            cargo test-bpf
