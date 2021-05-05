@@ -15,7 +15,6 @@ jobs:
           name: Setup Solana Toolchain
           command: |
             sh -c "$(curl -sSfL https://release.solana.com/v1.6.4/install)"
-            sudo apt-get install -y libssl-dev libudev-dev
             cargo install spl-token-cli
             cd program
       - run:
